@@ -17,10 +17,13 @@ import {
   JwtAuthenStrategy,
 } from './services/jwt-authen.service';
 import { MemberService } from './services/member.service';
+import { AppEnvironment } from './app.environment';
+
+console.log(AppEnvironment.dbHost);
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/member_db'),
+    MongooseModule.forRoot(AppEnvironment.dbHost),
     MongooseModule.forFeature([
       { name: 'Member', schema: memberSchema },
       { name: 'AccessToken', schema: accessTokenSchema },
@@ -33,7 +36,7 @@ import { MemberService } from './services/member.service';
     DBAuthenStrategy,
     JwtAuthenServiece,
     JwtAuthenStrategy,
-    MemberService
+    MemberService,
   ],
 })
 export class AppModule {}
